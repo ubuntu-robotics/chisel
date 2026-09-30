@@ -33,6 +33,10 @@ var PGPKeys = map[string]*PGPKeyData{
 		ID:          "4067E40313CB4B13",
 		PubKeyArmor: pubKeyUbuntuESMv2Armor,
 	},
+	"key-ubuntu-ros": {
+		ID:          "853874C8B0F10896",
+		PubKeyArmor: pubKeyUbuntuROSArmor,
+	},
 	"key1": {
 		ID:           "854BAF1AA9D76600",
 		PubKeyArmor:  pubKey1Armor,
@@ -201,6 +205,43 @@ DM9s4l0IuAPCsyayXrSmlyOAHzxDUeRMCEUnXWfycCUyqdyYIcCMPLV44Ccg9NyS
 RtgjPfAsUHUPRr0h//TzxRm5dbYdUyqMPzZcDO8wYBT/4xrwnFkSHZhnVxpw7PDi
 JYK4SVVc4ZO20PE1+RZc5oSbt4hRbFTCSb31Pydc
 =KWLs
+-----END PGP PUBLIC KEY BLOCK-----
+`
+
+// Ubuntu ROS Automatic Signing Key <esm@canonical.com>.
+// ID: 853874C8B0F10896.
+// The encryption subkey was dropped so the data has a single public key
+// packet, as required by pgputil.DecodePubKey.
+// Useful to validate InRelease files from live archive.
+const pubKeyUbuntuROSArmor = `
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+mQINBF7gpRkBEADohUlCXb3LnPtGuSc3aw0DBoCrRYJ+FGchSaDARyXq5W/NmIjQ
+P30wFVLMdj+Mo7nj0OsX0BWUyNcQT31qRLPxrKen/zFeQNjiUOyataJoXs0Y+wpj
+8ZNjEYSso59WOnvK7prbM9xjSrpjiaQwsy3RQoi+5kO0dVb/TiZDfQuEhO/Y9UNZ
+YnD7HT/ONPmCxThR0YUVjqCSKUSBDlo3QZ/oB8RzVcgQ8CPfcOX7rUeuMuujuKWk
+B1+xKyrc5HicBuAGlPmb5jN7GXsluFESGdz30qVFxPaQREtU+VJZOK/Z+h2Yoalx
+dC0hswodwyUQQK2d2sEbwcJhwUuLwTgLKCr9ePGpr/83GHzY6ZQi70oYKvITk6xp
+lMKLmcL1cRP3fLfRfXzWAuf48wF1qm9hNThmaQjVJpqHIPz1KebICX0Zv4etTXZQ
+ZU/IYvCFaKeohtPllpNsmTdNp8L6a725bPhbqcJJrfmF8S1monf7FSor5AXL4o7g
+3ePlgQaTtbAG+ctZH0wpN9crW/t9hTBA+lNqW9aDcqts1c1eFu8iE+lfS3fNpYiS
+k/zWPbHGAezbosBM1/yBvzEWZK9f2wLFvGg+CHRO1m+SzP+P9zXJLTCdTuRwhITg
+2uo6noaz3gL03nqF+kH4oMbWmKEwq3+CEEw3FxGzdy/EP0Kho3YWIg7xLQARAQAB
+tDRVYnVudHUgUk9TIEF1dG9tYXRpYyBTaWduaW5nIEtleSA8ZXNtQGNhbm9uaWNh
+bC5jb20+iQI4BBMBAgAiBQJe4KUZAhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIX
+gAAKCRCFOHTIsPEIlke3EADEsKpbEXgAZ3Gh2VgNVpsnqmyPm3mrNDMUWgVhCm2c
+Wg4uqrkUg5Gczhm4Y9ertDWUtswuJDYXdzs5WVrypkSryKDff78jzltCYiZ7iYer
+Ie1ukyI4W2StToX4vevzcW4eJ+ymtKHisXE/gZIEZRvToDWp97y+M+/0/gZs8OAB
+rMb5rcb9DKw5uAoxhwb5Ku/CuRujoD0xPoe8IijO0jio2jJBl9dcoTChM/6KQrbX
+k+DerDSaeWSsV2w6lEhTIJb5srrUmdiPQakPIyF4HHvIShn7HEx56QTmikjPRB+m
+fiX0ZOReS8KUlyulzIQPig+z0UH4/GprMHy1woCzaaEvntAFTq23B7dIyYoEkoms
+9EUZMHejkbS3blgU3GFcOFypV9NFiWZJC1ZAmgR60Tm8qFATj39wtbgokz8tVRJq
+MV7mOozEj6MXhA9fXUJCfY7jF1KVtwez/6Jhu7pgYhpR9PraJ2TBnz20C0ze5s/W
+QuviHHtoeEGQWupwVeKAdbLQMLH5+CyNgb7zqbLDDxTcQl3U2Cj8VYPHh9eC3XoY
+Q5Rr27t48RIa747JcI0bCCT0XVpxwAZMT8CGiR2G5+nlzmMRiGv+vKzQbuz6dGzu
+fwcLOpbwtslMY183l9l0LgmVlVSYkF35hH3U9JT1rIHPoDfFAHHjPZoonaa9vo4x
+lg==
+=EUWg
 -----END PGP PUBLIC KEY BLOCK-----
 `
 

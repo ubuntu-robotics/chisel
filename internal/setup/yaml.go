@@ -321,7 +321,7 @@ func parseRelease(baseDir, filePath string, data []byte) (*Release, error) {
 		}
 
 		switch details.Pro {
-		case "", archive.ProApps, archive.ProFIPS, archive.ProFIPSUpdates, archive.ProInfra:
+		case "", archive.ProApps, archive.ProFIPS, archive.ProFIPSUpdates, archive.ProInfra, archive.ProROS:
 		default:
 			logf("Archive %q ignored: invalid pro value: %q", archiveName, details.Pro)
 			continue
