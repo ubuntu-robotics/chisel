@@ -54,6 +54,7 @@ var (
 	keyUbuntuFIPSv1 = testutil.PGPKeys["key-ubuntu-fips-v1"]
 	keyUbuntuApps   = testutil.PGPKeys["key-ubuntu-apps"]
 	keyUbuntuESMv2  = testutil.PGPKeys["key-ubuntu-esm-v2"]
+	keyUbuntuROS    = testutil.PGPKeys["key-ubuntu-ros"]
 )
 
 func (s *httpSuite) SetUpTest(c *C) {
@@ -1135,6 +1136,7 @@ type realArchiveTest struct {
 	archs          []string
 	pkg            string
 	path           string
+	noCopyright    bool
 }
 
 var realArchiveTests = []realArchiveTest{{
@@ -1256,6 +1258,18 @@ var proArchiveTests = []realArchiveTest{{
 	pkg:            "hello",
 	path:           "/usr/bin/hello",
 }, {
+	name:           "focal-esm-ros",
+	version:        "20.04",
+	suites:         []string{"focal-security"},
+	components:     []string{"main"},
+	pro:            "ros",
+	archivePubKeys: []*packet.PublicKey{keyUbuntuROS.PubKey},
+	archs:          []string{"amd64"},
+	pkg:            "ros-foxy-tf2-ros",
+	path:           "/opt/ros/foxy/lib/tf2_ros/tf2_echo",
+	// ROS ESM packages do not ship a copyright file.
+	noCopyright: true,
+}, {
 	name:           "noble-esm-infra",
 	version:        "24.04",
 	suites:         []string{"noble-infra-security", "noble-infra-updates"},
@@ -1302,6 +1316,10 @@ func (s *S) testOpenArchiveArch(c *C, test realArchiveTest, arch string) {
 	}
 
 	testArchive, err := archive.Open(&options)
+	if errors.Is(err, archive.ErrCredentialsNotFound) {
+		c.Logf("Skipping ubuntu archive %s %s: %v", test.name, arch, err)
+		return
+	}
 	c.Assert(err, IsNil)
 
 	extractDir := c.MkDir()
@@ -1311,17 +1329,20 @@ func (s *S) testOpenArchiveArch(c *C, test realArchiveTest, arch string) {
 	c.Assert(info.Name, DeepEquals, test.pkg)
 	c.Assert(info.Arch, DeepEquals, arch)
 
+	extract := map[string][]tarball.ExtractInfo{
+		test.path: {
+			{Path: "/binary"},
+		},
+	}
+	if !test.noCopyright {
+		extract[fmt.Sprintf("/usr/share/doc/%s/copyright", test.pkg)] = []tarball.ExtractInfo{
+			{Path: "/copyright"},
+		}
+	}
 	err = tarball.Extract(pkg, &tarball.ExtractOptions{
 		Package:   test.pkg,
 		TargetDir: extractDir,
-		Extract: map[string][]tarball.ExtractInfo{
-			fmt.Sprintf("/usr/share/doc/%s/copyright", test.pkg): {
-				{Path: "/copyright"},
-			},
-			test.path: {
-				{Path: "/binary"},
-			},
-		},
+		Extract:   extract,
 	})
 	c.Assert(err, IsNil)
 

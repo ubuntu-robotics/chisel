@@ -215,6 +215,7 @@ const (
 	ProFIPSUpdates = "fips-updates"
 	ProApps        = "esm-apps"
 	ProInfra       = "esm-infra"
+	ProROS         = "ros"
 )
 
 var proArchiveInfo = map[string]struct {
@@ -235,6 +236,10 @@ var proArchiveInfo = map[string]struct {
 	ProInfra: {
 		BaseURL: "https://esm.ubuntu.com/infra/ubuntu/",
 		Label:   "UbuntuESM",
+	},
+	ProROS: {
+		BaseURL: "https://esm.ubuntu.com/ros/ubuntu/",
+		Label:   "UbuntuROS",
 	},
 }
 
